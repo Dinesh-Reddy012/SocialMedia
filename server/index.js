@@ -65,3 +65,10 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
     // User.insertMany(users);
     // Post.insertMany(posts);
 }).catch((error) => console.log(`${error} did not connect`));
+
+//
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
