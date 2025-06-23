@@ -54,6 +54,11 @@ app.post("/posts", verifyToken ,upload.single("picture"),createPost );
 app.use("/auth",authRoutes);
 app.use("/users",userRoutes)
 app.use("/posts",postRoutes)
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
 
 // Mongoose SETUP
 
@@ -66,9 +71,5 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
     // Post.insertMany(posts);
 }).catch((error) => console.log(`${error} did not connect`));
 
-//
-app.use(express.static(path.join(__dirname, "client/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/build", "index.html"));
-});
+
