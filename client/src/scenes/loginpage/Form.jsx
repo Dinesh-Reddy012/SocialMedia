@@ -102,6 +102,34 @@ const Form = () => {
     if (isRegister) await register(values, onSubmitProps);
   };
 
+  const handleGuestLogin = async () => {
+    const guestCredentials = {
+      email: "dinesh123@gmail.com",
+      password: "dinesh123",
+    };
+
+    try {
+      const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(guestCredentials),
+      });
+      const loggedIn = await loggedInResponse.json();
+      
+      if (loggedIn) {
+        dispatch(
+          setLogin({
+            user: loggedIn.user,
+            token: loggedIn.token,
+          })
+        );
+        navigate("/home");
+      }
+    } catch (error) {
+      console.error("Guest login failed:", error);
+    }
+  };
+
   return (
     <Formik
       onSubmit={handleFormSubmit}
@@ -140,6 +168,7 @@ const Form = () => {
                   }
                   helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Last Name"
@@ -150,6 +179,7 @@ const Form = () => {
                   error={Boolean(touched.lastName) && Boolean(errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Location"
@@ -160,6 +190,7 @@ const Form = () => {
                   error={Boolean(touched.location) && Boolean(errors.location)}
                   helperText={touched.location && errors.location}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <TextField
                   label="Occupation"
@@ -172,12 +203,14 @@ const Form = () => {
                   }
                   helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <Box
                   gridColumn="span 4"
                   border={`1px solid ${palette.neutral.medium}`}
                   borderRadius="5px"
                   p="1rem"
+                  required
                 >
                   <Dropzone
                     acceptedFiles=".jpg,.jpeg,.png"
@@ -218,6 +251,7 @@ const Form = () => {
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 4" }}
+              required
             />
             <TextField
               label="Password"
@@ -229,6 +263,7 @@ const Form = () => {
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
+              required
             />
           </Box>
 
@@ -247,6 +282,27 @@ const Form = () => {
             >
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
+            
+            {/* Guest Login Button - Only show on login page */}
+            {isLogin && (
+              <Button
+                fullWidth
+                onClick={handleGuestLogin}
+                sx={{
+                  mb: "2rem",
+                  p: "1rem",
+                  backgroundColor: palette.neutral.light,
+                  color: palette.neutral.dark,
+                  "&:hover": { 
+                    backgroundColor: palette.neutral.medium,
+                    color: palette.neutral.main,
+                  },
+                }}
+              >
+                LOGIN AS GUEST
+              </Button>
+            )}
+            
             <Typography
               onClick={() => {
                 setPageType(isLogin ? "register" : "login");
@@ -273,3 +329,8 @@ const Form = () => {
 };
 
 export default Form;
+
+
+
+
+
