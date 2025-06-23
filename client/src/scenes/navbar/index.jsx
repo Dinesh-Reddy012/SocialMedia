@@ -58,7 +58,7 @@ const Navbar = () => {
   const handler = setTimeout(() => {
     if (searchTerm.trim()) {
       fetch(
-        `http://localhost:3001/users/search?query=${searchTerm}`,
+        `https://socialmedia-backend-wsi0.onrender.com/users/search?query=${searchTerm}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
