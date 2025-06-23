@@ -64,7 +64,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "https://socialmedia-app-97st.onrender.com/auth/register",
+      "https://socialmedia-backend-wsi0.onrender.com/auth/register",
       {
         method: "POST",
         body: formData,
@@ -79,7 +79,7 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("https://socialmedia-app-97st.onrender.com/auth/login", {
+    const loggedInResponse = await fetch("https://socialmedia-backend-wsi0.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
@@ -109,7 +109,7 @@ const Form = () => {
     };
 
     try {
-      const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+      const loggedInResponse = await fetch("https://socialmedia-backend-wsi0.onrender.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(guestCredentials),
