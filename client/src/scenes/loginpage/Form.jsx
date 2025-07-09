@@ -140,6 +140,7 @@ const Form = () => {
                   }
                   helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Last Name"
@@ -150,6 +151,7 @@ const Form = () => {
                   error={Boolean(touched.lastName) && Boolean(errors.lastName)}
                   helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 2" }}
+                  required
                 />
                 <TextField
                   label="Location"
@@ -160,6 +162,7 @@ const Form = () => {
                   error={Boolean(touched.location) && Boolean(errors.location)}
                   helperText={touched.location && errors.location}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <TextField
                   label="Occupation"
@@ -172,12 +175,14 @@ const Form = () => {
                   }
                   helperText={touched.occupation && errors.occupation}
                   sx={{ gridColumn: "span 4" }}
+                  required
                 />
                 <Box
                   gridColumn="span 4"
                   border={`1px solid ${palette.neutral.medium}`}
                   borderRadius="5px"
                   p="1rem"
+                  required
                 >
                   <Dropzone
                     acceptedFiles=".jpg,.jpeg,.png"
@@ -185,6 +190,7 @@ const Form = () => {
                     onDrop={(acceptedFiles) =>
                       setFieldValue("picture", acceptedFiles[0])
                     }
+                    required
                   >
                     {({ getRootProps, getInputProps }) => (
                       <Box
@@ -218,6 +224,7 @@ const Form = () => {
               error={Boolean(touched.email) && Boolean(errors.email)}
               helperText={touched.email && errors.email}
               sx={{ gridColumn: "span 4" }}
+              required
             />
             <TextField
               label="Password"
@@ -229,6 +236,7 @@ const Form = () => {
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
               sx={{ gridColumn: "span 4" }}
+              required
             />
           </Box>
 
