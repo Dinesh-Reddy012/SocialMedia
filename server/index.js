@@ -17,7 +17,6 @@ import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js"
 import Post from "./models/post.js"
 import { users,posts} from "./data/index.js"
-import path from 'path';
 
 
 // Configurations
